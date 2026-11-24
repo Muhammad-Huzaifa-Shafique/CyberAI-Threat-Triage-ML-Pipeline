@@ -4,6 +4,21 @@ CyberAI is a Python tool that helps you decide quickly whether a **link**, **ema
 
 Use it from the command line or in a small web page on your own computer. It can also save your results as a PDF report.
 
+## What this project shows
+
+CyberAI is a rule-based first version. Every signal and every weight is a fixed number in the code, and its accuracy has not been measured yet. That makes it the baseline a trained model should be compared against, which is the next step below.
+
+| What an AI/ML team looks for | Where it shows up here |
+|---|---|
+| Features built from domain knowledge | Hand-written signals. For a URL: many hyphens, a long chain of subdomains, a very long domain, non-ASCII characters, and words such as "login" or "verify". For an email: a domain that looks like a trusted one (string similarity), SPF, DMARC and DKIM results, a Reply-To that differs from the sender, and phishing-style wording |
+| A baseline you can explain | Findings add points (see "How the verdict is decided"), and the reasons behind a verdict are listed with it. A score of 5 or more is Malware, 1 to 4 is Suspicious, and 0 is Clean |
+| Code that copes with unreliable outside services | VirusTotal, DNS and RDAP lookups have timeouts (20, 5 and 10 seconds), and a failed lookup comes back as an error note instead of stopping the run. The API key is read from an environment variable, never from the code |
+| Work that people can use | A command line, a small web page, a local SQLite history of past results and a PDF report |
+
+**Not done yet.** There is no labeled data and no accuracy figure, so there is no way yet to say how often the verdicts are right. The weights were not learned from data, and informational notes such as "SPF found" also add a point to an email's score (see "Good to know"). A test on labeled examples would show how much that matters.
+
+**Next step.** Train a classifier (logistic regression or gradient boosting) on a public, labeled phishing dataset, using signals like these as its inputs. Hold some data back and compare it with the hand-set score on precision and recall.
+
 ## What it can check
 
 | You give it | What CyberAI does |
