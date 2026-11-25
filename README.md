@@ -10,6 +10,8 @@ This repository holds the rule-based triage tool. It scores a link, an email or 
 
 CyberAI is larger than this tool. The wider project adds a machine-learning scoring pipeline (logistic regression, Isolation Forest, an elastic-net risk score, a drift monitor and a human-review queue) and an offline-first chat assistant that answers from a local cache and shows its evidence. That source is not published here yet. [ARCHITECTURE.md](ARCHITECTURE.md) explains how those parts work, with excerpts from the real code, a list of what is not measured and a list of known issues. Interactive explainers are on the [portfolio page](https://muhammad-huzaifa-shafique.github.io/cyberai.html).
 
+**Try it in the browser.** The [live demo](https://muhammad-huzaifa-shafique.github.io/cyberai.html#try) runs this tool's offline rules (URL warning signs, the look-alike check, the email wording and Reply-To rules, and the verdict thresholds) in JavaScript, so nothing you type is sent anywhere. It does not call VirusTotal, DNS or the other online checks. I compared that port with `CyberAI.py` on 28,600 cases and found no differences. The [test scripts, and the one limit of the test](https://github.com/Muhammad-Huzaifa-Shafique/Muhammad-Huzaifa-Shafique.github.io/tree/main/tests/cyberai-parity), are public.
+
 | What an AI/ML team looks for | Where it shows up in this tool |
 |---|---|
 | Features built from domain knowledge | Hand-written signals. For a URL: many hyphens, a long chain of subdomains, a very long domain, non-ASCII characters, and words such as "login" or "verify". For an email: a domain that looks like a trusted one (string similarity), SPF, DMARC and DKIM results, a Reply-To that differs from the sender, and phishing-style wording |
