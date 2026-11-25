@@ -1,4 +1,4 @@
-# CyberAI: Threat Triage Tool
+# CyberAI: Threat Triage ML Pipeline
 
 CyberAI is a Python tool that helps you decide quickly whether a **link**, **email**, or **PDF** looks safe. It runs several security checks at once and gives a plain verdict (**Clean**, **Suspicious**, or **Malware**) along with the reasons behind it.
 
@@ -47,8 +47,8 @@ A score of **5 or more** is **Malware**, **1 to 4** is **Suspicious**, and **0**
 You need Python 3.8 or newer.
 
 ```bash
-git clone https://github.com/Muhammad-Huzaifa-Shafique/CyberAI.git
-cd CyberAI
+git clone https://github.com/Muhammad-Huzaifa-Shafique/CyberAI-Threat-Triage-ML-Pipeline.git
+cd CyberAI-Threat-Triage-ML-Pipeline
 python -m venv .venv
 source .venv/bin/activate      # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
