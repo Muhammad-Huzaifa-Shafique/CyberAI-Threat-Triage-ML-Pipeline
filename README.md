@@ -4,20 +4,20 @@ CyberAI is a Python tool that helps you decide quickly whether a **link**, **ema
 
 Use it from the command line or in a small web page on your own computer. It can also save your results as a PDF report.
 
-## What this project shows
+## What this repository shows
 
-CyberAI is a rule-based first version. Every signal and every weight is a fixed number in the code, and its accuracy has not been measured yet. That makes it the baseline a trained model should be compared against, which is the next step below.
+This repository holds the rule-based triage tool. It scores a link, an email or a PDF with fixed points, lists the reasons behind the verdict, and saves each result to a local database. Its point values are set by hand, and its accuracy has not been measured.
 
-| What an AI/ML team looks for | Where it shows up here |
+CyberAI is larger than this tool. The wider project adds a machine-learning scoring pipeline (logistic regression, Isolation Forest, an elastic-net risk score, a drift monitor and a human-review queue) and an offline-first chat assistant that answers from a local cache and shows its evidence. That source is not published here yet. [ARCHITECTURE.md](ARCHITECTURE.md) explains how those parts work, with excerpts from the real code, a list of what is not measured and a list of known issues. Interactive explainers are on the [portfolio page](https://muhammad-huzaifa-shafique.github.io/cyberai.html).
+
+| What an AI/ML team looks for | Where it shows up in this tool |
 |---|---|
 | Features built from domain knowledge | Hand-written signals. For a URL: many hyphens, a long chain of subdomains, a very long domain, non-ASCII characters, and words such as "login" or "verify". For an email: a domain that looks like a trusted one (string similarity), SPF, DMARC and DKIM results, a Reply-To that differs from the sender, and phishing-style wording |
 | A baseline you can explain | Findings add points (see "How the verdict is decided"), and the reasons behind a verdict are listed with it. A score of 5 or more is Malware, 1 to 4 is Suspicious, and 0 is Clean |
 | Code that copes with unreliable outside services | VirusTotal, DNS and RDAP lookups have timeouts (20, 5 and 10 seconds), and a failed lookup comes back as an error note instead of stopping the run. The API key is read from an environment variable, never from the code |
 | Work that people can use | A command line, a small web page, a local SQLite history of past results and a PDF report |
 
-**Not done yet.** There is no labeled data and no accuracy figure, so there is no way yet to say how often the verdicts are right. The weights were not learned from data, and informational notes such as "SPF found" also add a point to an email's score (see "Good to know"). A test on labeled examples would show how much that matters.
-
-**Next step.** Train a classifier (logistic regression or gradient boosting) on a public, labeled phishing dataset, using signals like these as its inputs. Hold some data back and compare it with the hand-set score on precision and recall.
+**Not measured yet.** There is no accuracy figure for the triage score or for the machine-learning pipeline. The weights in this tool were not learned from data, and informational notes such as "SPF found" also add a point to an email's score (see "Good to know"). ARCHITECTURE.md explains why the training data in the working copy could not support a meaningful test.
 
 ## What it can check
 
@@ -93,6 +93,7 @@ The look-alike check compares domains against a built-in list (pittstate.edu, pa
 |---|---|
 | `CyberAI.py` | The whole tool: analysis checks, command line, web page, and PDF reports |
 | `requirements.txt` | Python packages to install |
+| `ARCHITECTURE.md` | How the machine-learning pipeline and the chat assistant work, with code excerpts, what is not measured and known issues |
 
 ## Good to know
 
